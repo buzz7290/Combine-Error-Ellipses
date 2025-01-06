@@ -67,11 +67,13 @@ Let a = length of semi-major axis
     b = length of semi-minor axis
     𝜃 = true heading of semi-major axis
 ```
-Then 
+
+Then
+```math
 $$V=\begin{bmatrix} cos(90-𝜃) & -sin(90-𝜃) \\
 sin(90-𝜃) & cos(90-𝜃) 
-\end{bmatrix}$$
-
+\end{bmatrix}
+```
 $$D=\begin{bmatrix}
 a^2/χ^2 & 0 \\
 0 & b^2/χ^2
