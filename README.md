@@ -86,12 +86,14 @@ Note 90-𝜃 comes from the fact that true heading is measured from y-axis in a 
 
 ## Combine Ellipses
 Using the converted data, error ellipses can be combined to produce a new ellipse. The resulting ellipse center and covariance matrix can be found using two equations
-$$
+```math
 𝜇_{f}=C_{f}\sum_{i}C_{i}^{-1}
-$$
-$$
+```
+and
+
+```math
 C_{f}=(\sum_{i}(C_{i})^{-1})^{-1},
-$$
+```
 where $𝜇_{i}$ are error ellipse centers and $C_{i}$ are covariance matrices from the converted input data. See [1] and [2] for detailed derivation of these equations. The resulting ellipse center is the improved estimate of the target location relative to ellipse 1. This relative location can be converted into MGRS. The resulting covariance matrix can be decomposed into eigenvectors and eigenvalues, which will provide semi-major axis length, semi-minor length, and the orientation of the ellipse.
 
 <p align="center">
