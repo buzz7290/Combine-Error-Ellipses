@@ -38,11 +38,18 @@ $$C=\begin{bmatrix}
 \end{bmatrix},$$  
 
 where $σ_{x}^2$ and $σ_{y}^2$ are variances of x and y, respectively, and $σ_{xy}$ is the covariance of x and y. Through spectral decomposition, the covariance matrix can be expressed as
-$$C = VDV^{-1}=
-\begin{bmatrix}
+$$C = VDV^{-1}=\begin{bmatrix}
 v_{ax} & v_{bx} \\
 v_{ay} & v_{by}
 \end{bmatrix}
+\begin{bmatrix}
+λ_{a} & 0 \\
+0 & λ_{b}
+\end{bmatrix}
+\begin{bmatrix}
+v_{ax} & v_{bx} \\
+v_{ay} & v_{by}
+\end{bmatrix}^{-1},
 $$
 
 where $v_{a}=\begin{bmatrix} v_{ax} \\ v_{ay} \end{bmatrix}$ and $v_{b}=\begin{bmatrix} v_{bx} \\ v_{by} \end{bmatrix}$ represent normalized vectors in the direction of major axis and minor axis, respectively, and $\sqrt{λ_{a}*χ^2}$ and $\sqrt{λ_{b}*χ^2}$ represent lengths of semi-major axis and semi-minor axis, respectively. $χ^2$ is the chi-squared value with two degrees of freedom. For an error ellipse with 95% confidence level, $χ^2=5.99.$ We can determine V and D from input data and hence determine covariance matrix as follows:
