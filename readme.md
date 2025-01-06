@@ -57,7 +57,7 @@ where
 $$v_{a}=\begin{bmatrix}
 v_{ax} \\
 v_{ay}
-\end{bmatrix}, <b> v_{b}=\begin{bmatrix} v_{bx} \\ 
+\end{bmatrix}, v_{b}=\begin{bmatrix} v_{bx} \\ 
 v_{by} 
 \end{bmatrix}$$
 
