@@ -84,7 +84,7 @@ a^2/χ^2 & 0 \\
 </p>
 Note 90-𝜃 comes from the fact that true heading is measured from y-axis in a clockwise direction while typical x-y coordinate angle is measured from x-axis in counterclockwise direction.
 
-## Combine Ellipses
+## Combining Ellipses
 Using the converted data, error ellipses can be combined to produce a new ellipse. The resulting ellipse center and covariance matrix can be found using two equations
 ```math
 𝜇_{f}=C_{f}\sum_{i}C_{i}^{-1}
