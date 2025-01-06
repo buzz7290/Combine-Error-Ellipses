@@ -52,11 +52,13 @@ v_{ax} & v_{bx} \\
 v_{ay} & v_{by}
 \end{bmatrix}^{-1},
 ```
-where 
-$$  v_{a}=\begin{bmatrix}
-    v_{ax} \\
-    v_{ay}
-    \end{bmatrix} $$ 
+where
+
+$$v_{a}=\begin{bmatrix}
+v_{ax} \\
+v_{ay}
+\end{bmatrix}$$
+
 represent normalized vectors in the direction of major axis and minor axis, respectively, and $\sqrt{λ_{a}*χ^2}$ and $\sqrt{λ_{b}*χ^2}$ represent lengths of semi-major axis and semi-minor axis, respectively. $χ^2$ is the chi-squared value with two degrees of freedom. For an error ellipse with 95% confidence level, $χ^2=5.99.$ We can determine V and D from input data and hence determine covariance matrix as follows:
 ```
 Let a = length of semi-major axis
