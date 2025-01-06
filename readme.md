@@ -70,7 +70,7 @@ Let a = length of semi-major axis
 
 Then
 ```math
-$$V=\begin{bmatrix} cos(90-𝜃) & -sin(90-𝜃) \\
+V=\begin{bmatrix} cos(90-𝜃) & -sin(90-𝜃) \\
 sin(90-𝜃) & cos(90-𝜃) 
 \end{bmatrix}
 ```
