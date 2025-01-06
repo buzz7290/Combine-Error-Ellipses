@@ -96,7 +96,7 @@ C_{f}=(\sum_{i}(C_{i})^{-1})^{-1},
 where $𝜇_{i}$ are error ellipse centers and $C_{i}$ are covariance matrices from the converted input data. See [1] and [2] for detailed derivation of these equations. The resulting ellipse center is the improved estimate of the target location relative to ellipse 1. This relative location can be converted into MGRS. The resulting covariance matrix can be decomposed into eigenvectors and eigenvalues, which will provide semi-major axis length, semi-minor axis length, and the ellipse orientation.
 
 <p align="center">
-<img width="594" alt="Final" src="https://github.com/user-attachments/assets/c4d1719c-2c15-450c-8089-f844603ddcf9" />
+<img width="607" alt="final" src="https://github.com/user-attachments/assets/7ca83639-bc98-41b1-92c6-6006b3f0bf47" />
 </p>
 
 Below is the resulting plot with the example input ellipse data presented previously. Note the combined ellipse has significantly smaller CEP than that of input error ellipses. 
