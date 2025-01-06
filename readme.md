@@ -68,11 +68,15 @@ Let a = length of semi-major axis
     𝜃 = true heading of semi-major axis
 ```
 Then 
-$$V=\begin{bmatrix} cos(90-𝜃) & -sin(90-𝜃) \\ sin(90-𝜃) & cos(90-𝜃) \end{bmatrix}$$
+$$V=\begin{bmatrix} cos(90-𝜃) & -sin(90-𝜃) \\
+sin(90-𝜃) & cos(90-𝜃) 
+\end{bmatrix}$$
+
 $$D=\begin{bmatrix}
 a^2/χ^2 & 0 \\
 0 & b^2/χ^2
 \end{bmatrix}.$$
+
 <p align="center">
 <img width="848" alt="Data_conversion" src="https://github.com/user-attachments/assets/019f7aa8-1fcb-42b5-980a-b16d0dc4df5d" />
 </p>
