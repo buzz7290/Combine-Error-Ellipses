@@ -89,7 +89,6 @@ Using the converted data, error ellipses can be combined to produce a new ellips
 ```math
 𝜇_{f}=C_{f}\sum_{i}C_{i}^{-1}
 ```
-and
 
 ```math
 C_{f}=(\sum_{i}(C_{i})^{-1})^{-1},
