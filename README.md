@@ -105,7 +105,7 @@ Below is the resulting plot with the example input ellipse data presented previo
 <img width="496" alt="Combined_Ellipse" src="https://github.com/user-attachments/assets/2e5dbe3c-e01c-4d03-8d3a-b23c59875250" />
 </p>
 
-It is worth noting two points. First, users must be sufficiently confident that signals associated with error ellipses are emitted fromt he same source. Second, this algorithm assumes that the error ellipses are collected at the same time. In practice, the time of collection will be different for each error ellipse, in which case lengths of axes must be reestimated based on the speed at which the target was moving and the distance it traveled from the time of collection until some common reference time for all error ellipses.
+It is worth noting two points. First, users must be sufficiently confident that signals associated with error ellipses are emitted from the same source. Second, this algorithm assumes that the error ellipses are collected at the same time. In practice, the time of collection will be different for each error ellipse, in which case lengths of axes must be reestimated based on the speed at which the target was moving and the distance it traveled from the time of collection until some common reference time for all error ellipses.
 
 ## References
 
