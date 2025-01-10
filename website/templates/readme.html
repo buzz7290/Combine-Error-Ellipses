@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <title align="center">Combining Error Ellipses</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 15px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        .math {
+            font-family: 'Times New Roman', Times, serif;
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+            height: auto;
+        }
+        .plot-container {
+            margin: 20px 0;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .plot-container iframe {
+            width: 100%;
+            border: none;
+            overflow: hidden;
+        }
+        @media screen and (max-width: 600px) {
+            body {
+                padding: 10px;
+                font-size: 14px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            h2 {
+                font-size: 20px;
+            }
+            h3 {
+                font-size: 18px;
+            }
+            h5 {
+                font-size: 14px;
+            }
+            .plot-container iframe {
+                height: 400px;
+            }
+            pre {
+                font-size: 12px;
+            }
+            .container {
+                padding: 0;
+            }
+            .form-group {
+                margin: 10px 0;
+            }
+        }
+        textarea.form-control {
+            font-size: 14px;
+            min-height: 120px;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px 0;
+            min-width: 120px;
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1 align="center">Combining Error Ellipses</h1>
+    <br>
+    <h5 style="font-style: italic;">Posted on 2025-01-09 by Daniel Y. Choi</h5>
+    <h5 style="font-style: italic;">Last updated on 2025-01-10</h5>
+    <h5>Python Code: <a href="https://github.com/buzz7290/Combine-Error-Ellipses">https://github.com/buzz7290/Combine-Error-Ellipses</a></h5>
+    <br>
+    <h2>Introduction</h2>
+    <p>In the context of maritime dynamic targeting, each type of weapon system requires a certain level of target 
+        location accuracy for effective employment. In a resource limited environment, target data with 
+        desired accuracy may not always be available. However, there is a clever way, using Bayes' theorem and 
+        optimal weighting, to combine a set of relatively poor target location data to generate a new target 
+        data with higher fidelity, which could be the single factor that determines whether a firing unit can 
+        engage a target or not.</p>
+
+    <p>This document presents the process of combining a set of error ellipses to generate an improved error 
+        ellipse with the greater accuracy of the source location. This process can be used to produce a smaller circular 
+        error probability (CEP) required for a given weapon system from a set of larger, less accurate CEPs.</p>
+
+    <h2>Definitions</h2>
+    <h3>Error Ellipse</h3>
+    <p>An error ellipse represents the estimate location of a signal source. This ellipse is a contour line of 
+        a bivariate Gaussian distribution typically with 95% confidence level; there is a 95% chance that the 
+        source is located inside the ellipse. Bivariate Gaussian probability density function is given by</p>
+        <div class="math">
+            <p>$$f(x,y)=
+                \frac{exp[-\frac{(\frac{x-𝜇_{x}}{ρ})^2-\frac{2ρ(x-𝜇_{x})(y-𝜇_{y})}{σ_{x}σ_{y}}+(\frac{y-𝜇_{y}}{ρ})^2}{2(1-ρ^2)}]}
+                {2πσ_{x}σ_{y}\sqrt{1-ρ^2}},$$</p>
+            <p>where \(𝜇_{x}\) and \(𝜇_{y}\) are the means of x and y, respectively, \(σ_{x}\) and \(σ_{y}\) are the standard 
+                deviations of x and y, respectively, and \(ρ\) is the correlation coefficient between x and y.</p>
+        </div>
+
+    <div class="plot-container">
+        <iframe src="static/bivariate_gaussian_3d.html" width="100%" height="600px" frameborder="0"></iframe>
+    </div>
+    
+    <h3>Circular Error Probability</h3>
+    <p>CEP is the radius of a circle that contains the target with a certain confidence level. In this document, 
+        CEP is assumed to have a confidence level of 95% or higher. Here we take the most conservative and the 
+        simplest method of converting a given error ellipse into a CEP, which is to consider 
+        the semi-major axis of an error ellipse as the CEP.</p>
+    
+    <p align="center">
+        <img width="371" alt="CEP" src="https://github.com/user-attachments/assets/56aac738-5982-4c6d-a1cb-a57a76418a88" />
+    </p>
+    <p>Error ellipse is a term commonly used by collectors while CEP is a term commonly used by shooters. 
+        In this document, we simply note that both represent the probability density of target location, 
+        or the degree of accuracy of target location. For more detailed discussion on the difference between
+        error ellipse and CEP and different methods of converting error ellipse into CEP, see [6].</p>
+
+    <h2>Input Data Conversion</h2>
+    <p>An observation of a signal from the source is represented by an error ellipse which can be defined by four 
+        parameters: center location in MGRS, length of semi-major axis in nautical miles (NM), length of 
+        semi-minor axis in NM, and orientation as true heading of the semi-major axis in degrees. Input of 
+        this algorithm is a set of ellipses, each with these four parameters, and output is another ellipse 
+        with more accurate MGRS estimate and smaller length of semi-major axis.</p>
+
+    <pre><code>input_data = [
+    # [MGRS, semi-maj axis in NM, semi-minor axis in NM, 
+    # 0 &lt; orientaion of major axis in degrees of true heading &lt; 180]
+    ['51RVG9297470182', 3.7757, 0.56, 29.16],  
+    ['51RVG9116274139', 1.73, 0.86, 123]
+]   </code></pre>
+
+    <p>In order to combine error ellipses, this input data must be converted into a format more conducive to 
+        further processing. First, MGRS is converted to (x,y) coordinates in nautical miles on a tangent plane, 
+        where the center of the first ellipse is taken as a reference point (0,0). Since the distance between 
+        centers of error ellipses are usually much smaller than the earth's radius, the lengths of axes are 
+        sufficiently preserved by the tangent plane projection. In other words, arc lengths can be approximated 
+        as straight lines on a 2D plane. Second, semi-major axis, semi-minor axis, and orientation of each 
+        ellipse are converted to a covariance matrix</p>
+
+    <div class="math">
+        <p>$$C=\begin{bmatrix} σ_{x}^2 &amp; σ_{xy} \\ σ_{xy} &amp; σ_{y}^2 \end{bmatrix},$$</p>
+        <p>where \(σ_{x}^2\) and \(σ_{y}^2\) are variances of x and y, respectively, and \(σ_{xy}\) is the 
+            covariance of x and y. Through spectral decomposition, the covariance matrix can be expressed as</p>
+        <p>$$C = VDV^{-1}= \begin{bmatrix} v_{ax} &amp; v_{bx} \\ v_{ay} &amp; v_{by} \end{bmatrix} 
+            \begin{bmatrix} λ_{a} &amp; 0 \\ 0 &amp; λ_{b} \end{bmatrix} \begin{bmatrix} v_{ax} &amp; 
+            v_{bx} \\ v_{ay} &amp; v_{by} \end{bmatrix}^{-1},$$</p>
+    </div>
+
+    <p>where $$v_{a}=\begin{bmatrix} v_{ax} \\ v_{ay} \end{bmatrix},
+        v_{b}=\begin{bmatrix} v_{bx} \\ v_{by} \end{bmatrix}$$ 
+        represent normalized vectors in the direction of major axis and minor axis, respectively, and 
+        \(\sqrt{λ_{a}*χ^2}\) and \(\sqrt{λ_{b}*χ^2}\) represent lengths of semi-major axis and 
+        semi-minor axis, respectively. \(χ^2\) is the chi-squared value with two degrees of freedom. 
+        For an error ellipse with 95% confidence level, \(χ^2=5.99.\) We can determine V and D from 
+        input data as follows:</p>
+
+    <pre><code>Let a = length of semi-major axis
+    b = length of semi-minor axis
+    𝜃 = true heading of semi-major axis
+    </code></pre>
+
+    <p>Then</p>
+    <div class="math">
+        <p>$$V=\begin{bmatrix} cos(90-𝜃) &amp; -sin(90-𝜃) \\ sin(90-𝜃) &amp; cos(90-𝜃) \end{bmatrix}$$</p>
+        <p>$$D=\begin{bmatrix} a^2/χ^2 &amp; 0 \\ 0 &amp; b^2/χ^2 \end{bmatrix}.$$</p>
+    </div>
+    <p>From V and D, we can determine the covariance matrix C. This data conversion scheme is shown below.</p>
+    <p align="center">
+        <img width="848" alt="Data_conversion" src="https://github.com/user-attachments/assets/019f7aa8-1fcb-42b5-980a-b16d0dc4df5d" />
+    </p>
+
+    <p>Note 90-𝜃 comes from the fact that true heading is measured from y-axis in a clockwise direction 
+        while typical x-y coordinate angle is measured from x-axis in counterclockwise direction.</p>
+
+    <h2>Combine Ellipses</h2>
+    <p>Using the converted data, error ellipses can be combined to produce a new ellipse. 
+        The resulting ellipse center and covariance matrix can be found using two equations</p>
+
+    <div class="math">
+        <p>$$𝜇_{f}=C_{f}\sum_{i}C_{i}^{-1}μ_{i}$$</p>
+        <p>$$C_{f}=(\sum_{i}(C_{i})^{-1})^{-1},$$</p>
+    </div>
+
+    <p>where \(𝜇_{i}\) are error ellipse centers and \(C_{i}\) are covariance matrices from the 
+        converted input data. See [1] and [2] for detailed derivation of these equations. 
+        The resulting ellipse center is the improved estimate of the target location relative to ellipse 1. 
+        This relative location can be converted back to MGRS. The resulting covariance matrix can be decomposed 
+        into eigenvectors and eigenvalues, which will provide semi-major axis length, semi-minor length, 
+        and the orientation of the ellipse. This process is schematically shown below.</p>
+
+    <p align="center">
+        <img width="594" alt="Final" src="https://github.com/user-attachments/assets/c4d1719c-2c15-450c-8089-f844603ddcf9" />
+    </p>
+
+    <p>Input ellipses and the combined ellipse can be plotted for visual illustration of this combination process.
+        Below is the resulting plot with the example input ellipse data presented previously. 
+        Note the combined ellipse has significantly smaller CEP than that of input error ellipses.</p>
+
+    <p align="center">
+        <img width="496" alt="Combined_Ellipse" src="https://github.com/user-attachments/assets/2e5dbe3c-e01c-4d03-8d3a-b23c59875250" />
+    </p>
+    <h2>Caveats</h2>
+    <p>It is worth noting two caveats. First, users must be sufficiently confident that signals associated 
+        with error ellipses are emitted from the same source. Second, this algorithm assumes that the error 
+        ellipses are collected at the same time. In practice, the time of collection will be different for 
+        each error ellipse, in which case lengths of axes must be reestimated based on the speed at which 
+        the target was moving and the distance it traveled from the time of collection until some common 
+        reference time for all error ellipses.</p>
+    
+    <div class="container mt-5">
+        <h3 align="center">Try Your Own</h3>
+        <form id="myForm" method="post">
+            <div class="form-group">
+                <label for="inputData">Example Input Data</label>
+                <textarea class="form-control" id="inputData" name="input_data" rows="6" required>{{ input_data }}</textarea>
+            </div>
+            <div class="container mt-5 text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+        <div id="response" class="mt-4"></div> <!-- Place to display response -->
+    </div>
+    
+    <script>
+        $(document).ready(function() {
+            $('#myForm').on('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+                
+                $.ajax({
+                    url: '/', // URL to Flask app
+                    type: 'POST',
+                    data: $(this).serialize(), // Serialize form data
+                    success: function(response) {
+                        // Update the response div with the returned data
+                        var output = response.output; // Adjust this according to your response structure
+                        var plotUrl = response.plot_url; // Also adjust this as needed
+                        
+                        $('#response').html(''); // Clear previous responses
+                        
+                        if (output) {
+                            $('#response').append('<h5>Combined Ellipse (MGRS, Semi-Major, Semi-Minor, True Heading of Semi-Major):</h5>');
+                            $('#response').append('<pre>' + JSON.stringify(output, null, 2) + '</pre>'); // Display formatted output
+                        }
+                        
+                        if (plotUrl) {
+                            $('#response').append('<h5>Resulting Plot:</h5>');
+                            $('#response').append('<img src="data:image/png;base64,' + plotUrl + '" alt="Plot Image"/>');
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        // Handle errors
+                        console.error('Error processing the form', textStatus, errorThrown);
+                    }
+                });
+            });
+        });
+    </script>
+    <h2>References</h2>
+    <p><a id="Martello"></a>[1] Davis, John E. "Combining Error Ellipses." CXC memo (2007).</p>
+    <p>[2] Orechovesky Jr, Joseph R. "Single source error ellipse combination." Master's thesis, 
+        Naval Postgraduate School, Monterey, CA (1996).</p>
+    <p>[3] Erten, Oktay, and Clayton V. Deutsch. "Combination of multivariate Gaussian distributions 
+        through error ellipses." Geostafisfics Lessons (2020).</p>
+    <p>[4] Blachman, Nelson M. "On combining target-location ellipses." IEEE Transactions on Aerospace 
+        and Electronic Systems 25.2 (1989): 284-287.</p>
+    <p>[5] Florescu, Ionut. "Probability and stochastic processes." John Wiley & Sons, 2014.</p>
+    <p>[6] California Institute of Technology Pasadena Jet Propulsion Laboratory. "Calculating the CEP (Circular Error Probable)." 1987.</p>
+</body>
+</html>
