@@ -60,11 +60,17 @@ fig.update_layout(
     paper_bgcolor='white',  # Background color outside the plot
     plot_bgcolor='white',   # Background color of the plot area
     legend=dict(
-        x=0.8,  # Position the legend closer to the plot
-        y=0.9,
+        x=0.01,  # Move legend to the left side
+        y=0.99,  # Position at the top
         bgcolor='rgba(255, 255, 255, 0.5)',
         bordercolor='black',
         borderwidth=1
+    ),
+    # Add colorbar positioning
+    coloraxis_colorbar=dict(
+        x=0.95,  # Move colorbar to the far right
+        y=0.5,   # Center vertically
+        len=0.75  # Reduce length of colorbar
     ),
     showlegend=True  # Ensure the legend is always shown
 )
