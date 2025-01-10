@@ -13,7 +13,7 @@ $$f(x,y)=
 \frac{exp[-\frac{(\frac{x-𝜇_{x}}{ρ})^2-\frac{2ρ(x-𝜇_{x})(y-𝜇_{y})}{σ_{x}σ_{y}}+(\frac{y-𝜇_{y}}{ρ})^2}{2(1-ρ^2)}]}
 {2πσ_{x}σ_{y}\sqrt{1-ρ^2}},
 $$
-where $𝜇_{x}$ and $𝜇_{y}$ are the mean of x and y, respectively, $σ_{x}$ and $σ_{y}$ are the standard deviations of x and y, respectively, and ρ is the correlation coefficient between x and y.
+where $𝜇_{x}$ and $𝜇_{y}$ are the means of x and y, respectively, $σ_{x}$ and $σ_{y}$ are the standard deviations of x and y, respectively, and ρ is the correlation coefficient between x and y.
 
 ### Circular Error Probability
 CEP is the radius of a circle that contains the target with a certain confidence level. In this document, CEP is assumed to have a confidence level of 95% or higher. Here we take the most conservative and the simplest method of converting a given error ellipse into a CEP, which is to consider the semi-major axis of an error ellipse as the CEP.
