@@ -5,6 +5,7 @@
 In the context of maritime dynamic targeting, each type of weapon system requires a certain level of target location accuracy for effective employment. In a resource-limited environment, target data with desired accuracy may not always be available. However, there is a clever way, using Bayes' theorem and optimal weighting, to combine a set of relatively poor target location data to generate a new target data with higher fidelity, which could be the single factor that determines whether a firing unit can engage a target or not.
 
 ## Error Ellipse
+
 An error ellipse represents the estimate location of a signal source. This ellipse is a contour line of a bivariate Gaussian distribution typically with 95% confidence level; there is a 95% probability that the source is located inside the ellipse. Bivariate Gaussian probability density function is given by    
 
 <p>
@@ -15,7 +16,7 @@ $$
 </p>
 where 𝜇<sub>x</sub> and 𝜇<sub>y</sub> are the means of x and y, respectively, σ<sub>x</sub> and σsub>y</sub> are the standard deviations of x and y, respectively, and ρ is the correlation coefficient between x and y.    
 <p align="center">
-![newplot](https://github.com/user-attachments/assets/dd5c8af3-9ad9-442a-b44c-083f38ea7885)
+<img width="687" alt="newplot" src="https://github.com/user-attachments/assets/8bedc524-8b29-4ecb-81e7-2a0e2f4b20d4" />
 </p>
 The degree of error ellipse accuracy is typically determined by the length of the semi-major axis; the smaller the semi-major axis, the more accurate the target location. When multiple ellipses are obtained from a single signal source, each ellipse cannot represent 95% probability of target location because the total probability cannot be greater than 1. Therefore, we need to update the overall probability density function based on new observations. This document presents the process of combining a set of error ellipses to generate an improved error ellipse with the greater accuracy of the source location, method of which is based on Bayes' theorem. 
 
