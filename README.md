@@ -13,7 +13,7 @@ $$f(x,y)=
 {2πσ_{x}σ_{y}\sqrt{1-ρ^2}},
 $$
 </p>
-where \(𝜇_{x}\) and $𝜇_{y}$ are the means of x and y, respectively, $σ_{x}$ and $σ_{y}$ are the standard deviations of x and y, respectively, and ρ is the correlation coefficient between x and y.    
+where $'𝜇_{x}'$ and $𝜇_{y}$ are the means of x and y, respectively, $σ_{x}$ and $σ_{y}$ are the standard deviations of x and y, respectively, and ρ is the correlation coefficient between x and y.    
 <p align="center">
 <img width="496" alt="Plot" src="https://github.com/user-attachments/assets/1085897d-a624-476f-bd18-5eb51b13300c" />
 </p>
