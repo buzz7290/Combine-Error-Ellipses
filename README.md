@@ -1,5 +1,6 @@
 # Combining Error Ellipses
 <p>Website: <a href="https://buzz7290.pythonanywhere.com">https://buzz7290.pythonanywhere.com</a></p>
+
 ## Introduction
 In the context of maritime dynamic targeting, each type of weapon system requires a certain level of target location accuracy for effective employment. In a resource-limited environment, target data with desired accuracy may not always be available. However, there is a clever way, using Bayes' theorem and optimal weighting, to combine a set of relatively poor target location data to generate a new target data with higher fidelity, which could be the single factor that determines whether a firing unit can engage a target or not.
 
