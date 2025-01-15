@@ -7,10 +7,12 @@ In the context of maritime dynamic targeting, each type of weapon system require
 ## Error Ellipse
 An error ellipse represents the estimate location of a signal source. This ellipse is a contour line of a bivariate Gaussian distribution typically with 95% confidence level; there is a 95% probability that the source is located inside the ellipse. Bivariate Gaussian probability density function is given by    
 
+<p>
 $$f(x,y)=
 \frac{exp[-\frac{(\frac{x-𝜇_{x}}{ρ})^2-\frac{2ρ(x-𝜇_{x})(y-𝜇_{y})}{σ_{x}σ_{y}}+(\frac{y-𝜇_{y}}{ρ})^2}{2(1-ρ^2)}]}
 {2πσ_{x}σ_{y}\sqrt{1-ρ^2}},
 $$
+</p>
 where $𝜇_{x}$ and $𝜇_{y}$ are the means of x and y, respectively, $σ_{x}$ and $σ_{y}$ are the standard deviations of x and y, respectively, and ρ is the correlation coefficient between x and y.    
 <p align="center">
 <img width="496" alt="Plot" src="https://github.com/user-attachments/assets/1085897d-a624-476f-bd18-5eb51b13300c" />
