@@ -1,28 +1,20 @@
 # Combining Error Ellipses
 <p>Website: <a href="https://buzz7290.pythonanywhere.com">https://buzz7290.pythonanywhere.com</a></p>
 ## Introduction
-In the context of maritime dynamic targeting, each type of weapon system requires a certain level of target location accuracy for effective employment. In a resource limited environment, target data with desired accuracy may not always be available. However, there is a clever way, using Bayes' theorem and optimal weighting, to combine a set of relatively poor target location data to generate a new target data with higher fidelity, which could be the single factor that determines whether a firing unit can engage a target or not.
+In the context of maritime dynamic targeting, each type of weapon system requires a certain level of target location accuracy for effective employment. In a resource-limited environment, target data with desired accuracy may not always be available. However, there is a clever way, using Bayes' theorem and optimal weighting, to combine a set of relatively poor target location data to generate a new target data with higher fidelity, which could be the single factor that determines whether a firing unit can engage a target or not.
 
-This document presents the process of combining a set of error ellipses to generate an improved error ellipse with the greater accuracy of the source location. This process can be used to produce a smaller circular error probability (CEP) required for a given weapon system from a set of larger, less accurate CEPs. 
-
-## Definitions
-### Error Ellipse
-An error ellipse represents the estimate location of a signal source. This ellipse is a contour line of a bivariate Gaussian distribution typically with 95% confidence level; there is a 95% chance that the source is located inside the ellipse. Bivariate Gaussian probability density function is given by
+## Error Ellipse
+An error ellipse represents the estimate location of a signal source. This ellipse is a contour line of a bivariate Gaussian distribution typically with 95% confidence level; there is a 95% probability that the source is located inside the ellipse. Bivariate Gaussian probability density function is given by
 
 $$f(x,y)=
 \frac{exp[-\frac{(\frac{x-𝜇_{x}}{ρ})^2-\frac{2ρ(x-𝜇_{x})(y-𝜇_{y})}{σ_{x}σ_{y}}+(\frac{y-𝜇_{y}}{ρ})^2}{2(1-ρ^2)}]}
 {2πσ_{x}σ_{y}\sqrt{1-ρ^2}},
 $$
-where $𝜇_{x}$ and $𝜇_{y}$ are the means of x and y, respectively, $σ_{x}$ and $σ_{y}$ are the standard deviations of x and y, respectively, and ρ is the correlation coefficient between x and y.
-
-### Circular Error Probability
-CEP is the radius of a circle that contains the target with a certain confidence level. In this document, CEP is assumed to have a confidence level of 95% or higher. Here we take the most conservative and the simplest method of converting a given error ellipse into a CEP, which is to consider the semi-major axis of an error ellipse as the CEP.
-
+where $𝜇_{x}$ and $𝜇_{y}$ are the means of x and y, respectively, $σ_{x}$ and $σ_{y}$ are the standard deviations of x and y, respectively, and ρ is the correlation coefficient between x and y.    
 <p align="center">
-<img width="371" alt="CEP" src="https://github.com/user-attachments/assets/56aac738-5982-4c6d-a1cb-a57a76418a88" />
+<img width="496" alt="Plot" src="https://github.com/user-attachments/assets/1085897d-a624-476f-bd18-5eb51b13300c" />
 </p>
-
-Error ellipse is a term commonly used by collectors while CEP is a term commonly used by shooters. In this document, we simply note that both represent the probability density of target location, or the degree of accuracy of target location. For more detailed discussion on the difference between error ellipse and CEP and different methods of converting error ellipse into CEP, see [6].
+The degree of error ellipse accuracy is typically determined by the length of the semi-major axis; the smaller the semi-major axis, the more accurate the target location. When multiple ellipses are obtained from a single signal source, each ellipse cannot represent 95% probability of target location because the total probability cannot be greater than 1. Therefore, we need to update the overall probability density function based on new observations. This document presents the process of combining a set of error ellipses to generate an improved error ellipse with the greater accuracy of the source location, method of which is based on Bayes' theorem. 
 
 ## Input Data Conversion
 An observation of a signal from the source is represented by an error ellipse which can be defined by four parameters: center location in MGRS, length of semi-major axis in nautical miles (NM), length of semi-minor axis in NM, and orientation as true heading of the semi-major axis in degrees. Input of this algorithm is a set of ellipses, each with these four parameters, and output is another ellipse with more accurate MGRS estimate and smaller length of semi-major axis.
@@ -89,10 +81,10 @@ where $𝜇_{i}$ are error ellipse centers and $C_{i}$ are covariance matrices f
 <img width="594" alt="Final" src="https://github.com/user-attachments/assets/c4d1719c-2c15-450c-8089-f844603ddcf9" />
 </p>
 
-Input ellipses and the combined ellipse can be plotted for visual illustration of this combination process. Below is the resulting plot with the example input ellipse data presented previously. Note the combined ellipse has significantly smaller CEP than that of input error ellipses. 
+Input ellipses and the combined ellipse can be plotted for visual illustration of this combination process. Below is the resulting plot with the example input ellipse data presented previously. Note the combined ellipse has significantly smaller semi-major axis than those of input error ellipses.
 
 <p align="center">
-<img width="496" alt="Combined_Ellipse" src="https://github.com/user-attachments/assets/2e5dbe3c-e01c-4d03-8d3a-b23c59875250" />
+<img width="496" alt="Plot" src="https://github.com/user-attachments/assets/e5086df8-ac00-4c59-b189-29f113ac9e55" />
 </p>
 
 ## Caveats
