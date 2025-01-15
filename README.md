@@ -15,7 +15,7 @@ $$
 </p>
 where 𝜇<sub>x</sub> and 𝜇<sub>y</sub> are the means of x and y, respectively, σ<sub>x</sub> and σsub>y</sub> are the standard deviations of x and y, respectively, and ρ is the correlation coefficient between x and y.    
 <p align="center">
-<img width="496" alt="Plot" src="https://github.com/user-attachments/assets/1085897d-a624-476f-bd18-5eb51b13300c" />
+![newplot](https://github.com/user-attachments/assets/69da54ad-da53-421e-b3a9-6117def7c8e1)
 </p>
 The degree of error ellipse accuracy is typically determined by the length of the semi-major axis; the smaller the semi-major axis, the more accurate the target location. When multiple ellipses are obtained from a single signal source, each ellipse cannot represent 95% probability of target location because the total probability cannot be greater than 1. Therefore, we need to update the overall probability density function based on new observations. This document presents the process of combining a set of error ellipses to generate an improved error ellipse with the greater accuracy of the source location, method of which is based on Bayes' theorem. 
 
