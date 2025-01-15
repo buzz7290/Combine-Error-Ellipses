@@ -21,7 +21,7 @@ where 𝜇<sub>x</sub> and 𝜇<sub>y</sub> are the means of x and y, respective
 The degree of error ellipse accuracy is typically determined by the length of the semi-major axis; the smaller the semi-major axis, the more accurate the target location. When multiple ellipses are obtained from a single signal source, each ellipse cannot represent 95% probability of target location because the total probability cannot be greater than 1. Therefore, we need to update the overall probability density function based on new observations. This document presents the process of combining a set of error ellipses to generate an improved error ellipse with the greater accuracy of the source location, method of which is based on Bayes' theorem. 
 
 ## Input Data Conversion
-An observation of a signal from the source is represented by an error ellipse which can be defined by four parameters: center location in MGRS, length of semi-major axis in nautical miles (NM), length of semi-minor axis in NM, and orientation as true heading of the semi-major axis in degrees. Input of this algorithm is a set of ellipses, each with these four parameters, and output is another ellipse with more accurate MGRS estimate and smaller length of semi-major axis.
+An error ellipse can be defined by four parameters: center location in MGRS, length of semi-major axis in nautical miles (NM), length of semi-minor axis in NM, and orientation as true heading of the semi-major axis in degrees. Input of this algorithm is a set of ellipses, each with these four parameters, and output is another ellipse with more accurate MGRS estimate and smaller length of semi-major axis.
 
 ```
 # Example input error ellipse data
@@ -40,7 +40,7 @@ $$C=\begin{bmatrix}
 σ_{xy} & σ_{y}^2
 \end{bmatrix},$$  
 
-where $σ_{x}^2$ and $σ_{y}^2$ are variances of x and y, respectively, and $σ_{xy}$ is the covariance of x and y. Through spectral decomposition, the covariance matrix can be expressed as
+where σ<sub>x</sub><sup>2</sup> and σ<sub>y</sub><sup>2</sup> are variances of x and y, respectively, and $σ_{xy}$ is the covariance of x and y. Through spectral decomposition, the covariance matrix can be expressed as
 $$C = VDV^{-1}=
 \begin{bmatrix}
 v_{ax} & v_{bx} \\
