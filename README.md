@@ -5,7 +5,7 @@
 In the context of maritime dynamic targeting, each type of weapon system requires a certain level of target location accuracy for effective employment. In a resource-limited environment, target data with desired accuracy may not always be available. However, there is a clever way, using Bayes' theorem and optimal weighting, to combine a set of relatively poor target location data to generate a new target data with higher fidelity, which could be the single factor that determines whether a firing unit can engage a target or not.
 
 ## Error Ellipse
-An error ellipse represents the estimate location of a signal source. This ellipse is a contour line of a bivariate Gaussian distribution typically with 95% confidence level; there is a 95% probability that the source is located inside the ellipse. Bivariate Gaussian probability density function is given by
+An error ellipse represents the estimate location of a signal source. This ellipse is a contour line of a bivariate Gaussian distribution typically with 95% confidence level; there is a 95% probability that the source is located inside the ellipse. Bivariate Gaussian probability density function is given by    
 
 $$f(x,y)=
 \frac{exp[-\frac{(\frac{x-𝜇_{x}}{ρ})^2-\frac{2ρ(x-𝜇_{x})(y-𝜇_{y})}{σ_{x}σ_{y}}+(\frac{y-𝜇_{y}}{ρ})^2}{2(1-ρ^2)}]}
